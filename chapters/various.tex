@@ -1,0 +1,53 @@
+\section*{Various}
+
+$$\nabla_x x^\top A = A \quad \nabla_x a^\top x = \nabla_x x^\top a = a$$
+$$\nabla_x b^\top A x = A^\top b \quad \nabla_x x^\top x = 2x$$\\[-20pt]
+$$\nabla_w || y-Xw||_2^2 = 2X^\top(Xw-y)$$
+$$(A^{-1})' = -A^{-1} A' A^{-1} \quad \nabla_x x^\top A x = (A + A^\top)x$$
+
+\textbf{Bayes Theorem}: $p(y \; | \; x) = \frac{1}{p(x)} \underbrace{p(y) \cdot p(x \; | \; y)}_{p(x,y)}$
+
+\textbf{Normal Distribution}:
+
+$\mathcal{N}(x; \mu, \Sigma) = \frac{1}{\sqrt{(2 \pi)^d \text{det}(\Sigma)}} \exp(-\frac{(x - \mu)^\top \Sigma^{-1} (x-\mu)}{2})$
+
+\textbf{More} $\text{Tr}(AB) = \text{Tr}(BA)$, 
+
+$\text{Var}(X) = \E[X^2] - \E[X]^2$
+ 
+Cov$[X] = \E[(X- \E[X])(X- \E[X])^\top]$;
+Covariance matrix for centered data: $
+\widehat{\operatorname{cov}}(X)=\frac{1}{n}X^\top X=\frac{1}{n}\sum_i x_ix_i^\top
+$; $p(z|x,\theta) = \frac{p(x,z|\theta)}{p(x | \theta)}$, $\text{Var}(AX) = A \text{Var}(X) A^\top$, $\text{Cov}(AX) = A \text{Cov}(X) A^\top$
+
+$A^{-1}=
+\begin{bsmallmatrix}
+a&b \\ 
+c&d
+\end{bsmallmatrix}^{-1}=\frac{1}{ad-bc}
+\begin{bsmallmatrix}
+d&-b \\ 
+-c&a
+\end{bsmallmatrix}
+$
+
+\textbf{Convexity}
+
+0: $L(\lambda w + (1 - \lambda)v) \leq \lambda L (w) + (1- \lambda) L(v)$
+
+1: $L(w) + \nabla L(w)^\top (v - w) \leq L(v)$
+
+2: Hessian $\nabla^2 L (w) \succcurlyeq 0$ (psd)
+
+\begin{rowlist}
+	\item $\alpha f + \beta g$, $\alpha, \beta \geq 0$, convex if $f, g$ convex
+	\item $f \circ g$, convex if $f$ convex and $g$ affine or $f$ non-decreasing and $g$ convex
+	\item $\max(f, g)$, convex if $f,g$ convex
+\end{rowlist}
+
+\textbf{PSD}
+$M \in \mathbb{R}^{n\times n}$ PSD $\Leftrightarrow \forall x \in \mathbb{R}^n: x^\top Mx \geq 0 \\
+\Leftrightarrow$ all principal minors of $M$ have non-negative determinant $\Leftrightarrow \lambda \geq 0 \ \forall \lambda\in\sigma(M)$
+
+\textbf{CLT} For $X_i$ iid with $m = \E[X_1]$ and $\text{Var}(X_1) = \sigma^2$: $\mathbb{P}\left[\frac{\sum_{i=1}^n X_i - n m}{\sqrt{\sigma^2 n}} \leq a\right] \xrightarrow[n \to \infty]{} \Phi(a)$.
+\textbf{KL Divergence} $D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})]$, 0 iff $P = Q$, always non-negative
