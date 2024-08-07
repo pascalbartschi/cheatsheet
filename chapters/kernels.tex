@@ -1,8 +1,16 @@
 \section*{Kernels}
 
-Parameterize: $w = \Phi^\top \alpha$, $K = \Phi \Phi^\top$, $k(x,y) = \varphi(x)^\top \varphi(y)$
+$w = \Phi^\top \alpha$ (param.ized), $k(x,y) = \varphi(x)^\top \varphi(y)$
 
-A kernel is \textbf{valid} if $K$ is sym.: $k(x,z) = k(z,x)$ and psd: $z^\top K z \geq 0$, check Gram matrix (matrix of all inner products) is psd
+
+\textbf{Valid} ~ \begin{rowlist}
+    \item $K$ is sym.: $k(x,z) = k(z,x)$
+    \item psd: $z^\top K z \geq 0$
+    $K(x, x') = \begin{bmatrix}
+                k(x, x) & k(x, x') \\
+                k(x', x) & k(x', x')
+                \end{bmatrix}$   
+\end{rowlist}
 
 \textbf{all monomials of deg. m}: $k(x,y) = (x^\top y)^m$ \\
 \textbf{all monomials up to deg. m}: $k(x,y) = (1+x^\top y)^m$, there are $\binom{d+m}{m}$ monomials of 

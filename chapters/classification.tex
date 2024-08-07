@@ -1,6 +1,6 @@
 \section*{Classification}
 
-\textbf{Zero-One loss} \quad not convex or continuous
+\textbf{Zero-One loss} \quad not convex nor continuous
 
 \qquad \qquad $\ell_{0-1}(\hat{f}(x), y) = \mathbb{I}_{y \neq \sgn \hat{f}(x)}$
 
@@ -10,43 +10,30 @@
 
 \textbf{Softmax} $p(1 | x) = \frac{1}{1 + e^{- \hat{f}(x)}}, p(-1 | x) = \frac{1}{1 + e^{\hat{f}(x)}}$ 
 
-Multi-Class \ \ \ $\hat{p}_k = e^{\hat{f}_k(x)} / \sum_{i=1}^K e^{\hat{f}_j(x)}$
+Cross-Entropy \ \ \ $\hat{p}_k = e^{\hat{f}_k(x)} / \sum_{i=1}^K e^{\hat{f}_j(x)}$
 
 \subsection*{Linear Classifiers}
 
-$f(x) = w^\top x$, the decision boundary $f(x) = 0$. \smallskip
+Dec. bound: $f(x) = w^\top x + b  = 0$
 
-If data is lin. sep., grad. desc. converges to \textbf{Maximum-Margin Solution}: 
+If data is lin. sep. GD  converges to \textbf{Maximum-Margin Solution}: 
 
-\quad $w_\text{MM} = \text{argmax} \; \text{margin} (w) \; \text{with } ||w||_2 = 1$
-
-Where $\text{margin} (w) = \min_i y_i w^\top x_i$.
+$w_{\text{MM}} = \text{argmax} \; \underbrace{\text{min}_i y_i w^\top x_i (w)}_{\text{margin}(w)} \; \text{, } ||w||_2 = 1$ \\[-15pt]
  
-\subsection*{Support Vector Machines}
-\textbf{Hard SVM}
-
-\qquad $\hat{w} = \min_w ||w||_2 \; \; \text{s.t. } \forall i \;y_i w^\top x_i \geq 1$
+\subsection*{SVMs}
  
-\textbf{Soft SVM} \quad allow "slack" in the constraints
-$$\hat{w} = \min_{w, \xi} \frac{1}{2} ||w||_2^2 + \lambda \sum_{i=1}^n \underbrace{\max (0, 1 - y_i w^\top x_i)}_{\text{hinge loss}}$$ \\[-23pt]
+\textbf{\textcolor{purple}{Soft SVM} / Hard SVM} \quad \textcolor{purple}{"slack"} 
+$$\hat{w} = \min_{w, \xi} \frac{1}{2} ||w||_2^2 \textcolor{purple}{ + \lambda \sum_{i=1}^n \underbrace{\max (0, 1 - y_i w^\top x_i)}_{\text{hinge loss}}}$$ \\[-10pt]
+$\text{s.t. } \forall i \;y_i w^\top x_i \geq 1 \textcolor{purple}{- \xi}$ 
 
 \subsection*{Metrics} 
-
-\begin{multicols*}{2}
-	\begin{center}
-		\includegraphics[width=\columnwidth]{confusion-matrix.jpeg}
-	\end{center}
-	
-	$\text{error}_1 / \text{FPR}: \frac{\text{FP}}{\text{TN + FP}}$
-	$\text{error}_2 / \text{FNR}: \frac{\text{FN}}{\text{TP + FN}}$
-	$\text{TPR / Recall}: \frac{\text{TP}}{\text{TP + FN}}$
-	$\text{TNR}: \frac{\text{TN}}{\text{TN + FP}}$
-\end{multicols*}
-
-.\\[-20pt]
+$\textbf{error}_1 / \textbf{FPR}: \frac{\text{FP}}{\text{TN + FP}}$
+$\textbf{error}_2 / \text{FNR}: \frac{\text{FN}}{\text{TP + FN}}$
+$\textbf{TPR / Recall}: \frac{\text{TP}}{\text{TP + FN}}$
+$\textbf{TNR}: \frac{\text{TN}}{\text{TN + FP}}$
 $\text{Precision}: \frac{\text{TP}}{\text{TP + FP}} = 1 - \text{FDR}$, FDR = $\frac{FP}{TP + FP}$
 
-\textbf{AUROC}: Plot TPR (y) vs. FPR (x) and compare different ROC's with area under the curve.
+\textbf{AUROC}: TPR (y) vs. FPR (x)
 
 \textbf{F1-Score}: $\frac{2TP}{2TP+FP+FN}=\frac{2}{1/Precision+1/Recall}$, $\text{Accuracy}: \frac{\text{TP + TN}}{\text{P + N}} = \frac{TP + TN}{TP + TN + FP + FN}$
 
