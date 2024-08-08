@@ -2,38 +2,44 @@
 
 \subsection*{k-Means Clustering}
 
-Want $\mu_i$ to minimize $\sum_{i=1}^n \min_{j\in\{1,...k\}}\|x_i-\mu_j\|_2^2$
-Non-convex and NP-hard in general. Can be kernelized.
+$\min \hat{R}(\mu) = \sum_{i=1}^n \min_{j\in\{1,...k\}}\|x_i-\mu_j\|_2^2$
 
-\subsection*{Lloyd's heuristic}
-$\hspace*{3mm}z_i = \text{argmin}_{j\in\{1,...,k\}}\|x_i - \mu_j^{t-1}\|_2^2\\
-\hspace*{3mm}\mu_j^{(t)} = \frac{1}{n_j}\sum_{i:z_i=j}x_i$\\
-Monotonically decreases objective and converges to a local 
-optimum. Cost per iteration $O(nkd)$, worst-case exponential
+Non-convex, NP-hard, . Can be kernelized. \\[-10pt]
 
-\textbf{k-Means++}: \begin{compactitem}
-	\item Random data point $\mu_1 = x_i$
-	\item Add $\mu_2,...,\mu_k$ rand., with prob:
-		$$\text{given } \mu_{1:j} \text{ pick } \mu_{j+1} = x_i$$ 
-		$\text{ where } p(i) = \frac{1}{z} \min_{l \in \{1,...,j\}} ||x_i - \mu_l||_2^2$
-\end{compactitem}
-Converges in expectation $\mathcal O (\log k) * \text{opt. solution}$.
+$\arg \min_{\substack{W \in \mathbb{R}^{d \times k} \\ \{ z_i \}_{i=1}^{n} \subset E_k}} \sum_{i=1}^{n} \left\| W z_i - x_i \right\|_2^2$
+
+
+
+
+\textbf{Lloyd's heuristic \quad \normalfont \color{black}(closed form)} 
+
+1. assign $z_i = \text{argmin}_{j\in\{1,...,k\}}\|x_i - \mu_j^{t-1}\|_2^2$
+
+2. update $\mu_j^{(t)} = \frac{1}{n_j}\sum_{i:z_i=j}x_i$\\
+Monotonically decreases objective (to local min). iter$^{-1}$: $O(nkd)$, worst-case exponential
+
+\textbf{k-Means++}: $p(i) = \frac{1}{z} \min_{l \in \{1,...,j\}} ||x_i - \mu_l||_2^2$
+
+Converges in exp. $\mathcal O (\log k) * \text{opt. solution}$.
 
 \subsection*{Principal Component Analysis}
+ 
+$\arg \min_{\substack{W \in \mathbb{R}^{d \times k} \\ \{ z_i \}_{i=1}^{n} \subset \mathbb{R}^k \\ W^T W = I_k}} \sum_{i=1}^{n} \left\| W z_i - x_i \right\|_2^2
+$ (s.t. $\mu = 0$)
 
-Given centered data, the PCA problem is 
-$$\min_{W^\top W=I_k,z_i\in\R^k}\sum_{i=1}^n||W z_i - x_i||_2^2,$$
 with solution $W^* = (v_1|...|v_k)$ where $v_i$ are the ordered 
 eigvec. of $\frac{1}{n}\sum_ix_ix_i^\top$ 
 and $z_i = {W^*}^\top x_i$. 
 
 \subsection*{PCA through SVD}
 \color{White} . \color {Black}\\[-10pt]
-The first $k$ columns of $V$ where $X = U S V^\top$.
+$X = U S V^\top \rightarrow \Sigma = \frac{1}{n} X^T X = \frac{1}{n} VS^2 V^T.$
+
+$W_*=V_i$  (i PCs) \& $\lambda_i = \frac{\sigma_i^2}{n} \rightarrow \lambda_i$ is Var(PC$_i$)
 
 \subsection*{Kernel PCA}
 
-The Kernel Principal Components are given by $\alpha^{(1)},...,\alpha^{(k)}\in \mathbb{R}^n$ 
+Kernel PCs are given by $\alpha^{(1)},...,\alpha^{(k)}\in \mathbb{R}^n$ 
 where $\alpha^{(i)} = \frac{1}{\sqrt{\lambda_i}}v_i$ and 
 $K = \sum_{i=1}^n \lambda_i v_i v_i^\top$ with ordered $\lambda_i.$ A point 
 $x$ is projected to $z \in \mathbb{R}^k$:

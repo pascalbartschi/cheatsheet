@@ -12,11 +12,12 @@ $w = \Phi^\top \alpha$ (param.ized), $k(x,y) = \varphi(x)^\top \varphi(y)$
                 \end{bmatrix}$   
 \end{rowlist}
 
-\textbf{all monomials of deg. m}: $k(x,y) = (x^\top y)^m$ \\
-\textbf{all monomials up to deg. m}: $k(x,y) = (1+x^\top y)^m$, there are $\binom{d+m}{m}$ monomials of 
-order $m$ in $d$ variables.\\
+\textbf{all monomial kernels \textcolor{purple}{up to}/\textcolor{green}{of} deg. m}: $k(x,y) = (\textcolor{purple}{1 + }x^\top y)^m$ with $\binom{d+m\textcolor{green}{-1}}{m}$ monomials
 
-\textbf{RBF}: $k(x, z) = \exp ( -\frac{||x - z||_\alpha}{\tau} )$, $\alpha = 1 \Rightarrow $ Laplacian kernel, $\alpha = 2 \Rightarrow $ Gaussian kernel
+\textbf{RBF}: $k(x, z) = \exp ( -\frac{||x - z||_\alpha}{\tau} )$, $\uparrow \tau : \uparrow \text{std}$
+
+Laplacian: $\alpha = 1$, Gaussian: $\alpha = 2$ 
+
 
 \textbf{Mercers Theorem}: Valid kernels can be decomposed into a lin. comb. of inner products.
 

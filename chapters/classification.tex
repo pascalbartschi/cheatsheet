@@ -24,7 +24,9 @@ $w_{\text{MM}} = \text{argmax} \; \underbrace{\text{min}_i y_i w^\top x_i (w)}_{
  
 \textbf{\textcolor{purple}{Soft SVM} / Hard SVM} \quad \textcolor{purple}{"slack"} 
 $$\hat{w} = \min_{w, \xi} \frac{1}{2} ||w||_2^2 \textcolor{purple}{ + \lambda \sum_{i=1}^n \underbrace{\max (0, 1 - y_i w^\top x_i)}_{\text{hinge loss}}}$$ \\[-10pt]
-$\text{s.t. } \forall i \;y_i w^\top x_i \geq 1 \textcolor{purple}{- \xi}$ 
+$\text{s.t. } \forall i \;y_i ( w^\top x_i + b )\geq 1 \textcolor{purple}{- \xi}$ 
+
+Hyperpl.: $f(x) = \beta_0 + \sum_{i \in S} \alpha_i y_i \langle \phi(x), \phi(x_i) \rangle$
 
 \subsection*{Metrics} 
 $\textbf{error}_1 / \textbf{FPR}: \frac{\text{FP}}{\text{TN + FP}}$
