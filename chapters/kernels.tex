@@ -6,11 +6,13 @@ $w = \Phi^\top \alpha$ (param.ized), $k(x,y) = \varphi(x)^\top \varphi(y)$
 \textbf{Valid} ~ \begin{rowlist}
     \item $K$ is sym.: $k(x,z) = k(z,x)$
     \item psd: $z^\top K z \geq 0$
-    $K(x, x') = \begin{bmatrix}
+    $K(x, x') = \begin{bsmallmatrix}
                 k(x, x) & k(x, x') \\
                 k(x', x) & k(x', x')
-                \end{bmatrix}$   
+                \end{bsmallmatrix}$   
 \end{rowlist}
+
+find k(x, x) $<$ 0, one can prove Det(K) $<$ 0
 
 \textbf{all monomial kernels \textcolor{purple}{up to}/\textcolor{green}{of} deg. m}: $k(x,y) = (\textcolor{purple}{1 + }x^\top y)^m$ with $\binom{d+m\textcolor{green}{-1}}{m}$ monomials
 
@@ -36,3 +38,5 @@ Laplacian: $\alpha = 1$, Gaussian: $\alpha = 2$
 \textbf{Kern. Ridge Reg.}
 Ansatz: $w^*=\Phi^\top\alpha$\\
 $\min_w \frac1n \|y - \Phi w\|^2 + \lambda ||w||_2^2 = \min_\alpha \frac1n ||y - K\alpha||_2^2 + \lambda \alpha^\top K \alpha$
+
+$\text{non-empty data, } \& \exists \hat{\alpha} : \hat{w} = \sum_{i=1}^{n} \hat{\alpha}_i \phi(x_i).$

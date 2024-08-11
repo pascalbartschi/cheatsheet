@@ -1,13 +1,14 @@
+\\[-20pt]
+
 \section*{Various}
 
-$$\nabla_x x^\top A = A \quad \nabla_x a^\top x = \nabla_x x^\top a = a$$
-$$\nabla_x b^\top A x = A^\top b \quad \nabla_x x^\top x = 2x$$\\[-20pt]
-$$\nabla_w || y-Xw||_2^2 = 2X^\top(Xw-y)$$
+$\nabla_x x^\top A = A ,\nabla_x a^\top x = \nabla_x x^\top a = a , \nabla_x x^\top x = 2x$
+$\nabla_x b^\top A x = A^\top b , \nabla_{W_2} W_2(W_1 x) = x^T W_1^T $
 $$(A^{-1})' = -A^{-1} A' A^{-1} \quad \nabla_x x^\top A x = (A + A^\top)x$$
 
 \textbf{Standardization} : $\tilde{x}_{i,j} = \frac{(x_{i,j}-\hat{\mu}_j)}{\hat{\sigma}_j}$ $\rightarrow \mathcal{N}(0, 1)$
 
-\textbf{Bayes Theorem}: $p(y \; | \; x) = \frac{1}{p(x)} \underbrace{p(y) \cdot p(x \; | \; y)}_{p(x,y)}$
+\textbf{Projection} $\tilde{\mathbf{x}} = \frac{\mathbf{v}_1 \mathbf{v}_1^T}{\|\mathbf{v}_1\|_2^2} \mathbf{x} = \frac{\mathbf{v}_1^T \mathbf{x}}{\|\mathbf{v}_1\|_2^2} \mathbf{v}_1$
 
 \textbf{Normal Distribution}:
 
@@ -33,7 +34,7 @@ d&-b \\
 \end{bsmallmatrix}
 $
 
-\textbf{Convexity}
+\textbf{Convexity} (strong: unique global min.)
 
 0: $L(\lambda w + (1 - \lambda)v) \leq \lambda L (w) + (1- \lambda) L(v)$
 
@@ -52,4 +53,5 @@ $M \in \mathbb{R}^{n\times n}$ PSD $\Leftrightarrow \forall x \in \mathbb{R}^n: 
 \Leftrightarrow$ all principal minors of $M$ have non-negative determinant $\Leftrightarrow \lambda \geq 0 \ \forall \lambda\in\sigma(M)$
 
 \textbf{CLT} For $X_i$ iid with $m = \E[X_1]$ and $\text{Var}(X_1) = \sigma^2$: $\mathbb{P}\left[\frac{\sum_{i=1}^n X_i - n m}{\sqrt{\sigma^2 n}} \leq a\right] \xrightarrow[n \to \infty]{} \Phi(a)$.
-\textbf{KL Divergence} $D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})]$, 0 iff $P = Q$, always non-negative
+\textbf{KL Divergence} $D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})] \geq 0$ , 0 iff $P = Q$, $P_{\text{MLE}} = \arg \min_{\nu \in \Delta} D_{KL}(Q \parallel P)$
+

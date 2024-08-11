@@ -25,7 +25,9 @@ Converges in exp. $\mathcal O (\log k) * \text{opt. solution}$.
 \subsection*{Principal Component Analysis}
  
 $\arg \min_{\substack{W \in \mathbb{R}^{d \times k} \\ \{ z_i \}_{i=1}^{n} \subset \mathbb{R}^k \\ W^T W = I_k}} \sum_{i=1}^{n} \left\| W z_i - x_i \right\|_2^2
-$ (s.t. $\mu = 0$)
+$ (s.t. $\mu = 0$) \\[-17pt]
+
+\hspace{120pt} $= \sum_{j=1}^{k}\lambda_j$
 
 with solution $W^* = (v_1|...|v_k)$ where $v_i$ are the ordered 
 eigvec. of $\frac{1}{n}\sum_ix_ix_i^\top$ 

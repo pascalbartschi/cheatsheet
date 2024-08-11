@@ -15,14 +15,17 @@ Parametric Family: $\mathbb{P}^* = \mathbb{P}^{\theta*} \in \mathcal{P}.$  ,e.g.
 evidence: $p(\mathcal{D}) = \int p(\mathcal{D} \mid \theta) p(\theta) d\theta$
 
 \subsection*{MLE \quad \color{black}$\arg \max_{\theta \in \Theta} p(\mathcal{D}; \theta)$} 
-$\hat{\theta}_{\text{MLE}} \overset{\text{i.i.d.}}{:=} \arg \max_{\theta \in \Theta} \prod_{i=1}^{n} p(x_i, y_i; \theta)$
+$\hat{\theta}_{\text{MLE}} \overset{\text{i.i.d.}}{:=} \arg \max_{\theta \in \Theta} \prod_{i=1}^{n} p(x_i; \theta) $
 
-$\overset{\text{(discr.)}}{=} \arg \min_{\theta \in \Theta} \sum_{i=1}^{n} -\log p(y_i \mid x_i; \theta)$
+$\overset{\text{(discr.)}}{=} \frac{\partial}{\partial \theta}
+ \sum_{i=1}^{n} -\log p(x_i \mid \theta) \overset{!}{=} 0$
 
 \subsection*{MAP \quad \color{black}$\arg \max_{\theta \in \Theta} p(\theta \mid \mathcal{D})$}
-$\hat{\theta}_{\text{MAP}} \overset{\text{i.i.d.}}{:=} \arg \max_{\theta \in \Theta} \left( \prod_{i=1}^{n} p(x_i, y_i \mid \theta) \right) p(\theta)$
+$\hat{\theta}_{\text{MAP}} \overset{\text{i.i.d.}}{:=} \arg \max_{\theta \in \Theta} \left( \prod_{i=1}^{n} p(x_i\mid \theta) \right) p(\theta)$
 
-$\overset{\text{discr.}}{=} \arg \min_{\theta \in \Theta} \sum_{i=1}^{n} -\log p(y_i \mid x_i; \theta) - \log p(\theta)$ $\rightarrow$ MLE = MAP iff $p(\theta) \sim U$
+$\overset{\text{discr.}}{=}  \frac{\partial}{\partial \theta} \sum_{i=1}^{n} -\log p(x_i \mid \theta) - \log p(\theta) \overset{!}{=} 0$ 
+
+$\rightarrow$ MLE = MAP iff $p(\theta) \sim U$
 
 
 
@@ -39,7 +42,22 @@ Given $p(y \; | \; x)$, a set of actions $A$ and a cost $C: Y \times A \mapsto \
 
 \qquad \qquad $a^* = \text{argmin}_{a \in A} \; \E_y[C(y,a) \; | \; x]$
 
-Can be used for asymetric costs or abstention
+\textbf{(Asymmetric) 01 loss}
+
+$\mathbb{E} [\ell(a, Y) \mid X = x] =  \left( 1 - p(a \mid x) \right) c_a$
+
+$f^*(x) = \arg \min_{a \in \mathcal{Y}} \left( 1 - p(a \mid x) \right) c_a
+$
+
+\textbf{01 loss with abstention}
+
+$\mathbb{E} [\ell(a, Y) \mid X = x] =
+\begin{cases}
+c_a(1 - p(a \mid x)), & \text{if } a \neq r \\
+c_r, & \text{if } a = r,
+\end{cases}$
+$\rightarrow c_a(1 - p(a \mid x)) > c_r$ 
+
 
 \section*{Probabilistic View on Regression}
 
@@ -50,9 +68,9 @@ where $\epsilon \sim \mathcal{N}(0, \sigma^2)$ and $f(x) = w^\top x$:
 $ \rightarrow \hat p(y \; | \; x, \theta) = \mathcal{N}(y; w^\top x, \sigma^2)$
 
 
-\subsection*{MLE \color{black}$\hat p(y \; | \; x, \theta) = \mathcal{N}(y; w^\top x, \sigma^2)$}
+\subsection*{MLE} 
 
-$\hat w = \argmax{w} \; p(y | x, \theta) =\argmin{w} \sum (y_i - w^\top x_i)^2$
+$\hat w = \argmax{w} \; p(y | x, \theta) =\argmin{w} \sum (y_i - w^\top x_i)^2$ \\[-10pt]
 
 \subsection*{MAP}
 
@@ -60,32 +78,32 @@ Assume prior on $\theta \rightarrow \uparrow \text{bias} \downarrow \text{var}$
 
 a) $\theta_i \sim \mathcal{N}(0, \sigma^2_\theta)$ b) $\theta_i \sim \text{Laplace}(0, b)$
 
-Posterior: $p(\theta \; | \; x, y) = \frac{p(\theta) \cdot p( y \; | \; x, \theta)}{p( y \; | \; x)}$
-
-$\hat w = \text{argmax}_w \; p(w \; | \; \bar x, \bar y)$ \\[-8pt]
-
-\quad $= \text{argmin}_w \; \lambda ||w||_{1_b, 2_a}^2 + \sum_{i=1}^n(y_i - w^\top x_i)^2$
+$\hat w = \text{argmin}_w \; \lambda ||w||_{1_b, 2_a}^2 + \sum_{i=1}^n(y_i - w^\top x_i)^2$
 
 a) $\lambda = \frac{\sigma^2}{\sigma^2_\theta}$ b) $\lambda = \frac{\sigma^2}{b^2}$
 
-Priors = regularizers \& likelihoods = losses
+Priors $\hat{=} $ regularizers \& likelihoods $\hat{=} $ losses
 
-% continue here: 
+% continue here: add abstention case for bayes optimal classifier: 
+% l_missclassify 
 \section*{Probabilistic View on Classification}
 
-$f$ minimizing the population risk: $f^*(x) = \text{argmax}_{\hat y} \; p(\hat y \; | \; x)$
+Bayes' optimal predictor for the 0-1 loss: $f^*(x) = \text{argmax}_{\hat y} \; p(\hat y \; | \; x)$
 
-This is called the Bayes' optimal predictor for the 0-1 loss. Assuming iid. Bernoulli noise, the conditional probability is:
+Assuming iid. Bernoulli noise \quad $p(y \; | \; x,w) \sim \text{Ber}(y; \sigma(w^\top x))$
+$\sigma(z) = \frac{1}{1 + \exp(-z)}$ (sigmoid)
 
-\qquad \qquad$p(y \; | \; x,w) \sim \text{Ber}(y; \sigma(w^\top x))$
+\subsection*{MLE with logistic loss:}
 
-Where $\sigma(z) = \frac{1}{1 + \exp(-z)}$ is the sigmoid function. Using MLE we get:
+\;$\hat w = \argmin{w} \sum_{i = 1}^n \log (1 + \exp(-y_i w^\top x_i))$
 
-\quad \;$\hat w = \argmin{w} \sum_{i = 1}^n \log (1 + \exp(-y_i w^\top x_i))$
+\subsection*{MAP with logistic loss}
 
-Which is the logistic loss. Instead of MLE we can estimate MAP, e.g. with a Gaussian prior:
+a) $\theta_i \sim \mathcal{N}(0, \sigma^2_\theta)$ b) $\theta_i \sim \text{Laplace}(0, b)$
 
-$\; \;\hat w = \argmin{w} \; \lambda ||w||_2^2 + \sum_{i = 1}^n \log (1 + e^{-y_i w^\top x_i})$
+
+$\; \;\hat w = \argmin{w} \; \lambda ||w||_{1, 2}^2 + \sum_{i = 1}^n \log (1 + e^{-y_i w^\top x_i})$
+a) $\lambda = \frac{1}{2 \sigma^2_\theta}$ b) $\lambda = \frac{1}{b}$
 
 
 
